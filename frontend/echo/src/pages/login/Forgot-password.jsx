@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Register() {
+export default function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,18 +51,12 @@ export default function Register() {
 
       <div className="wrapper">
         <div>
-          <h1>Register</h1>
+          <h1>Forgot Password?</h1>
 
-          <div className="input-box">
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <i className="vx bxs-user"></i>
-          </div>
+          {/* <div className="input-box">
+                        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required/>
+                        <i className="vx bxs-user"></i>
+                    </div> */}
 
           <div className="inputbox">
             <input
@@ -75,7 +69,7 @@ export default function Register() {
             <i className="vx bxs-envelope"></i>
           </div>
 
-          <div className="input-box">
+          {/* <div className="input-box">
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
@@ -107,7 +101,7 @@ export default function Register() {
               />
               Remember me
             </label>
-          </div>
+          </div> */}
 
           <button
             type="submit"
@@ -115,12 +109,14 @@ export default function Register() {
             id="register"
             onClick={handleRegister}
           >
-            Register
+            Reset Password
           </button>
 
           <div className="registr-link">
             <p>
-              Already Have An Account? <a href="/Login">Login</a>
+              Don't Have An Account or Already Have One?{" "}
+              <a href="/Register">Register</a>
+              <a href="/Login">Login</a>
             </p>
           </div>
         </div>

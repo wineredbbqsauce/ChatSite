@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Register() {
+export default function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -51,18 +51,12 @@ export default function Register() {
 
       <div className="wrapper">
         <div>
-          <h1>Register</h1>
+          <h1>Login</h1>
 
-          <div className="input-box">
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <i className="vx bxs-user"></i>
-          </div>
+          {/* <div className="input-box">
+                        <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required/>
+                        <i className="vx bxs-user"></i>
+                    </div> */}
 
           <div className="inputbox">
             <input
@@ -120,7 +114,7 @@ export default function Register() {
 
           <div className="registr-link">
             <p>
-              Already Have An Account? <a href="/Login">Login</a>
+              Don't Have An Account? <a href="/Register">Register</a>
             </p>
           </div>
         </div>

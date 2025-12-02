@@ -1,85 +1,135 @@
-const { createServer } = require('http');
-const express = require('express');
-const cors = require('cors');
-const { MongoClient } = require("mongodb");
-const path = require('path');
-const bcrypt = require('bcrypt');
-require("dotenv").config({path: "../config/.env"});
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const fs = require("fs");
+const bcrypt = require("bcrypt");
+require("dotenv").config({ path: path.join(__dirname, "../../config/.env") });
+
+// Use yout DB helper that returns a connection from MariaDB pool
+// Ensure backend/src/server/db.js uses MariaDB instead of MongoDB
+
+// Ensure backend/src/server/db.js exports getConnection()
+const { getConnection } = require("./db");
 
 const app = express();
-const hostname = 'localhost';
-const port = 25565;
+const hostname = "localhost";
+const port = process.env.PORT || 25565;
 
 // Middleware
+
 app.use(express.json());
+app.use(cors());
 
-
-// Add Register Route
-app.post('/api/login', async (req, res) => {
-    try {
-        const { name, username, password } = req.body;
-        if (!name || !username || !password) return res.status(400).json({ error: "All fields are required" });
-
-        // Here you would normally check the database for user credentials
-        const db = await getDb();
-        const user = await db.collection('users').findOne({ username });
-
-        const existingUser = await db.collection('users').findOne({ username });
-        if (existingUser) return res.status(400).json({ error: "User already exists" });
-
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const doc = { name, username, password: hashedPassword, createdAt: new Date()};
-        await users.insertOne(doc);
-
-        res.status(201).json({ success: true });
-    } catch (err) {
-        console.error("Error in /api/register:", err);
-        res.status(500).json({ error: "Internal server error" });
-    }
+// Health route
+app.post("/api/health", (req, res) => {
+  res.json({ status: "OK", env: process.env.NODE_ENV || "development" });
 });
 
+/** app.get("/api/health", (req, res) => {
+  const { name, username, password } = req.body;
+  if (!name || !username || !password) return res.status(400).json({ error: "Missing required fields"});
 
-/**
-// test route
+  let conn;
+  try {
+    conn = await getConnection();
 
-app.get('/', (req, res) =>{
-    res.json({ message: "Welcome to the server!"});
+    const existingUser = await conn.query("SELECT id FROM users WHERE username = ?",a [username]);
+    if (existing.length > 0) return res.statues(400).json({ error: "User Already Exist"});
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await conn.query("INSERT INTO users (name, username, password) VALUES (?, ?, ?, NOW())", [name, username, hashedPassword]);
+  
+    res.statues(200).json({ success: true});
+  } catch (e) {
+    console.error("Error during registration:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (conn) conn.release();
+  }
+}); */
+
+// Register
+app.post("/api/register", async (req, res) => {
+  const { name, username, password } = req.body;
+  if (!name || !username || !password)
+    return res.status(400).json({ error: "Missing required fields" });
+
+  let conn;
+  try {
+    conn = await getConnection();
+
+    const existingUser = await conn.query(
+      "SELECT id FROM users WHERE username = ?",
+      [username]
+    );
+    if (existingUser.length > 0)
+      return res.status(400).json({ error: "User Already Exists" });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await conn.query(
+      "INSERT INTO users (name, username, password, created_at) VALUES (?, ?, ?, NOW())",
+      [name, username, hashedPassword]
+    );
+
+    res.status(200).json({ success: true });
+  } catch (err) {
+    console.error("Error during registration:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (conn) conn.release();
+  }
 });
 
+// Login
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password)
+    return res
+      .status(400)
+      .json({ error: "Missing required fields. Invalid Credentials" });
 
-// Serve static frontend files
-app.use(express.static(path.join(__dirname, '../../../echo/public/src/pages/Login.jsx')))
+  let conn;
+  try {
+    conn = await getConnection();
+    const rows = await conn.query(
+      "SELECT id, password FROM users WHERE username = ?",
+      [username]
+    );
+    if (rows.length === 0)
+      return res.status(400).json({ error: "Invalid Credentials" });
 
+    const user = rows[0];
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch)
+      return res.status(400).json({ error: "Invalid Credentials" });
 
-// Example protected route (add more as needed)
-// API routes
-
-app.post('/api/login', (req, res) => {
-    // Handle login logic here
-    res.json({ success: true});
+    // Return Minimal User Info
+    res.json({ id: user.id, username });
+  } catch (err) {
+    console.error("Error during login:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (conn) conn.release();
+  }
 });
 
-// Catch-all: serve index.html fir React routing
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, '../../../echo/public/src/pages/login', 'index.html'));
-})
+// Serve frontend (production). Checks common build/public folders.
+const candidatePaths = [
+  path.join(__dirname, "../../frontend/echo/build"),
+  path.join(__dirname, "../../frontend/echo/public"),
+];
 
+const reactBuildPath = candidatePaths.find((p) => fs.existsSync(p));
+if (reactBuildPath) {
+  app.use(express.static(reactBuildPath));
+  app.get("*", (req, res) =>
+    res.sendFile(path.join(reactBuildPath, "index.html"))
+  );
+}
 
+// Start Server
 app.listen(port, hostname, () => {
-    console.log(`Server running at http://${hostname}:${port}/`);
+  console.log(`Server Running At http://${hostname}:${port}/`);
 });
 
-
-
-const server = createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World\n');
-});
-
-server.listen(port, hostname, () => {
-    console.log("Server running at http://" + hostname + ":" + port + "/");
-});
-
-
-*/
+module.exports = app;
