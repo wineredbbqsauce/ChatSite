@@ -2,16 +2,19 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "connect.js",
+  "main": "src/server/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon connect.js"
+    "dev": "nodemon src/server/server.js",
+    "start": "node src/server/server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "dbs": "^0.2.0",
     "dotenv": "^17.2.3",
+    "express": "^4.22.1",
     "mongodb": "^7.0.0",
     "nodemon": "^3.1.11"
   }
