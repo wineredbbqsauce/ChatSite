@@ -16,7 +16,7 @@
 
 ---
 
-Under arbeid:
+### Under arbeid:
 
 - Fikse en Landing / Home side
 - Fikse slik at Registrer og Login funker slik den skal
