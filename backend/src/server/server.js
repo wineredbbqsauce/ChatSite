@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 require("dotenv").config({ path: path.join(__dirname, "../../config/.env") });
 
 // Use yout DB helper that returns a connection from MariaDB pool

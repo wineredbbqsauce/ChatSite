@@ -15,7 +15,11 @@
     "dbs": "^0.2.0",
     "dotenv": "^17.2.3",
     "express": "^4.22.1",
-    "mongodb": "^7.0.0",
+    "mariadb": "^3.1.4",
+    "nodemon": "^3.1.11",
+    "bcryptjs": "^2.4.3"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.11"
   }
 }
