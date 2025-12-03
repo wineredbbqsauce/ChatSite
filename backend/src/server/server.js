@@ -3,7 +3,27 @@ const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
-require("dotenv").config({ path: path.join(__dirname, "../../config/.env") });
+require("dotenv").config({
+  path: path.join(__dirname, "../../config/config.env"),
+});
+
+// Serve frontend (production). Checks common build/public folders
+const candidatePaths = [
+  // path.join(__dirname, "../../frontend/echo/build"),
+  // path.join(__dirname, "../../frontend/echo/public"),
+  path.join(__dirname, "../../frontend/src/pages/login/Register.jsx"),
+];
+
+const frontendPath = candidatePaths.find((p) => fs.existsSync(p));
+if (frontendPath) {
+  app.use(express.static(frontendPath));
+  app -
+    this.get("*", (req, res) =>
+      res.sendFile(path.join(frontendPath, "index.html"))
+    );
+} else {
+  console.warn("No frontend buld/public folder found at:", candidatePaths);
+}
 
 // Use yout DB helper that returns a connection from MariaDB pool
 // Ensure backend/src/server/db.js uses MariaDB instead of MongoDB
@@ -28,24 +48,24 @@ app.post("/api/health", (req, res) => {
 // Register
 app.post("/api/auth/register", async (req, res) => {
   try {
-  const { name, username, password, passwordConfirm } = req.body;
+    const { name, username, password, passwordConfirm } = req.body;
 
-//   // Validation
-//   if (!name || !username || !password || !passwordConfirm) {
-//     return res.status(400).json({ error: "Missing required fields" });
-//   }
-//   if (password !== passwordConfirm) {
-//     return res.status(400).json({error: "Passwords do not match"});
-//   }
+    //   // Validation
+    //   if (!name || !username || !password || !passwordConfirm) {
+    //     return res.status(400).json({ error: "Missing required fields" });
+    //   }
+    //   if (password !== passwordConfirm) {
+    //     return res.status(400).json({error: "Passwords do not match"});
+    //   }
 
-//   // Check if user already exists
-//   let conn = await getConnection();
-//   const existing = await conn.query("SELECT if FROM users WHERE email = ?", [email]);
-//   conn.release();
+    //   // Check if user already exists
+    //   let conn = await getConnection();
+    //   const existing = await conn.query("SELECT if FROM users WHERE email = ?", [email]);
+    //   conn.release();
 
-// }
+    // }
 
-  let conn;
+    let conn;
 
     conn = await getConnection();
 
@@ -103,12 +123,6 @@ app.post("/api/login", async (req, res) => {
     if (conn) conn.release();
   }
 });
-
-// Serve frontend (production). Checks common build/public folders.
-const candidatePaths = [
-  path.join(__dirname, "../../frontend/echo/build"),
-  path.join(__dirname, "../../frontend/echo/public"),
-];
 
 const reactBuildPath = candidatePaths.find((p) => fs.existsSync(p));
 if (reactBuildPath) {
