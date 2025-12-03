@@ -7,33 +7,32 @@ require("dotenv").config({
   path: path.join(__dirname, "../../config/config.env"),
 });
 
+// Ensure backend/src/server/db.js exports getConnection()
+const { getConnection } = require("./db");
+
+const app = express(); // DEFINE APP BEFORE USING. DEFINE APP FIRST
+const hostname = "localhost";
+const port = process.env.PORT || 25565;
+
 // Serve frontend (production). Checks common build/public folders
 const candidatePaths = [
-  // path.join(__dirname, "../../frontend/echo/build"),
-  // path.join(__dirname, "../../frontend/echo/public"),
-  path.join(__dirname, "../../frontend/src/pages/login/Register.jsx"),
+  path.join(__dirname, "../../../frontend/build"),
+  path.join(__dirname, "../../../frontend/dist"),
+  path.join(__dirname, "../../../frontend/public"),
 ];
 
 const frontendPath = candidatePaths.find((p) => fs.existsSync(p));
 if (frontendPath) {
   app.use(express.static(frontendPath));
-  app -
-    this.get("*", (req, res) =>
-      res.sendFile(path.join(frontendPath, "index.html"))
-    );
+  app.get("*", (req, res) =>
+    res.sendFile(path.join(frontendPath, "index.html"))
+  );
 } else {
   console.warn("No frontend buld/public folder found at:", candidatePaths);
 }
 
 // Use yout DB helper that returns a connection from MariaDB pool
 // Ensure backend/src/server/db.js uses MariaDB instead of MongoDB
-
-// Ensure backend/src/server/db.js exports getConnection()
-const { getConnection } = require("./db");
-
-const app = express();
-const hostname = "localhost";
-const port = process.env.PORT || 25565;
 
 // Middleware
 
