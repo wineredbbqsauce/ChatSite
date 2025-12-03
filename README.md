@@ -23,5 +23,8 @@
 - Koble sammen database (backend) og Forsiden (frontend)
 
 ---
+### INSTALL DEPENDENCIES
+- cd frontend
+- npm install
 
 ###### All right served to me (BBQ Sauce Inc. Coop. Com. Org. Net.) <3
