@@ -25,37 +25,28 @@ app.post("/api/health", (req, res) => {
   res.json({ status: "OK", env: process.env.NODE_ENV || "development" });
 });
 
-/** app.get("/api/health", (req, res) => {
-  const { name, username, password } = req.body;
-  if (!name || !username || !password) return res.status(400).json({ error: "Missing required fields"});
-
-  let conn;
-  try {
-    conn = await getConnection();
-
-    const existingUser = await conn.query("SELECT id FROM users WHERE username = ?",a [username]);
-    if (existing.length > 0) return res.statues(400).json({ error: "User Already Exist"});
-
-    const hashedPassword = await bcrypt.hash(password, 10);
-    await conn.query("INSERT INTO users (name, username, password) VALUES (?, ?, ?, NOW())", [name, username, hashedPassword]);
-  
-    res.statues(200).json({ success: true});
-  } catch (e) {
-    console.error("Error during registration:", err);
-    res.status(500).json({ error: "Internal Server Error" });
-  } finally {
-    if (conn) conn.release();
-  }
-}); */
-
 // Register
-app.post("/api/register", async (req, res) => {
-  const { name, username, password } = req.body;
-  if (!name || !username || !password)
-    return res.status(400).json({ error: "Missing required fields" });
+app.post("/api/auth/register", async (req, res) => {
+  try {
+  const { name, username, password, passwordConfirm } = req.body;
+
+//   // Validation
+//   if (!name || !username || !password || !passwordConfirm) {
+//     return res.status(400).json({ error: "Missing required fields" });
+//   }
+//   if (password !== passwordConfirm) {
+//     return res.status(400).json({error: "Passwords do not match"});
+//   }
+
+//   // Check if user already exists
+//   let conn = await getConnection();
+//   const existing = await conn.query("SELECT if FROM users WHERE email = ?", [email]);
+//   conn.release();
+
+// }
 
   let conn;
-  try {
+
     conn = await getConnection();
 
     const existingUser = await conn.query(
