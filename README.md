@@ -24,7 +24,9 @@
 
 ---
 ### INSTALL DEPENDENCIES
-- cd frontend
-- npm install
+- git clone https://github.com/wineredbbqsauce/ChatSite.git
+- cd ChatSite
+
+
 
 ###### All right served to me (BBQ Sauce Inc. Coop. Com. Org. Net.) <3
