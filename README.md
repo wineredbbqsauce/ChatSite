@@ -24,50 +24,67 @@
 
 ---
 
-### RUN AND INSTALL FILES
+## SETUP
 
-1. git clone https://github.com/wineredbbqsauce/ChatSite.git
-2. cd ChatSite
-3. npm run setup
-4. npm start
+### 1. Clone The Repository:
+```bash
+    git clone https://github.com/wineredbbqsauce/ChatSite.git
 
+    cd ChatSite
+```
+### 2. Install all the dependencies and build:
+```bash
+    npm run setup
+```
+### 3. Configure your databse in `config/config.env`:
+```env
+    DB_HOST={your_host, (eks: localhost)}
+    DB_USER={your_user}
+    DB_PASSWORD={your_password}
+    DB_NAME=chatsitedb
+    PORT=25565
+```
+### 4. Start the server:
+```bash
+    npm start
+```
 ---
-
+---
 #### INSTALL DEPENDENCIES MANUALLY IF "RUN AND INSTALL FILES" DID NOT WORK
 
 ##### 1. Clone Repository
-
+```bash
 1. git clone -b backup-before-undo https://github.com/wineredbbqsauce/ChatSite.git (as for now)
 2. cd ChatSite
-
+```
 ##### 2. Install Backend Dependencies
-
+```bash
 1. cd backend/
 2. npm install
-
+```
 ##### 3. Install Frontend Dependencies
-
+```bash
 1. cd ../frontend
 2. npm install react-scripts@5.0.1 --save
 3. npm install
-
+```
 ##### 4. Build the Frontend
-
+```bash
 1. npm run build
-
+```
 ##### 5. Change Directory
-
+```bash
 1. cd ..
 2. cd backend/
-
+```
 ##### 6. Start Server
-
+```bash
 1. npm run dev
+```
+###### (using *run dev* for now..)
 
-###### (using run dev for now..)
 
-
-###### to be continued...
+###### ***to be continued...***
 
 ---
 
