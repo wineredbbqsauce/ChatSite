@@ -4,7 +4,7 @@ const path = require("path");
 const fs = require("fs");
 const bcrypt = require("bcryptjs");
 require("dotenv").config({
-  path: path.join(__dirname, "../../config/config.env"),
+  path: path.join(__dirname, "../../../config/config.env"),
 });
 
 // Ensure backend/src/server/db.js exports getConnection()
