@@ -24,27 +24,48 @@
 
 ---
 
-### INSTALL DEPENDENCIES
+### RUN AND INSTALL FILES
 
-#### 1. Clone Repository
+1. git clone https://github.com/wineredbbqsauce/ChatSite.git
+2. cd ChatSite
+3. npm run setup
+4. npm start
+
+---
+
+#### INSTALL DEPENDENCIES MANUALLY IF "RUN AND INSTALL FILES" DID NOT WORK
+
+##### 1. Clone Repository
 
 1. git clone -b backup-before-undo https://github.com/wineredbbqsauce/ChatSite.git (as for now)
 2. cd ChatSite
 
-#### 2. Install Backend Dependencies
+##### 2. Install Backend Dependencies
 
 1. cd backend/
 2. npm install
 
-#### 3. Install Frontend Dependencies
+##### 3. Install Frontend Dependencies
 
 1. cd ../frontend
 2. npm install react-scripts@5.0.1 --save
 3. npm install
 
-#### 4. Build the Frontend
+##### 4. Build the Frontend
 
 1. npm run build
+
+##### 5. Change Directory
+
+1. cd ..
+2. cd backend/
+
+##### 6. Start Server
+
+1. npm run dev
+
+###### (using run dev for now..)
+
 
 ###### to be continued...
 
