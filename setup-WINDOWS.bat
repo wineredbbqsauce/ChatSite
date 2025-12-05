@@ -22,6 +22,7 @@ echo.
 echo Creating config\config.env file...
 if not exist config mkdir config
 (
+echo HOST=0.0.0.0
 echo DB_HOST=localhost
 echo DB_USER=user
 echo DB_PASSWORD=password

@@ -11,7 +11,7 @@ require("dotenv").config({
 const { getConnection } = require("./db");
 
 const app = express(); // DEFINE APP BEFORE USING. DEFINE APP FIRST
-const hostname = "localhost";
+const hostname = "0.0.0.0";
 const port = process.env.PORT || 25565;
 
 // Serve frontend (production). Checks common build/public folders
