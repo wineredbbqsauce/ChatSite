@@ -33,6 +33,7 @@
 ```bash
 git clone https://github.com/wineredbbqsauce/ChatSite.git
 cd ChatSite
+chmod +x ./setup-LINUX-MAC.sh
 sudo ./setup-LINUX-MAC.sh
 ```
 
