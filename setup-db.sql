@@ -2,7 +2,7 @@
 CREATE DATABASE IF NOT EXISTS chatsitedb;
 
 -- Create user
-CREATE USER IF NOT EXISTS "user"@"localhost" IDENTIFIED BY "1234";
+CREATE USER IF NOT EXISTS "user"@"localhost" IDENTIFIED BY "password";
 GRANT ALL PRIVILEGES ON chatsitedb.* TO "user"@"localhost";
 FLUSH PRIVILEGES;
 
