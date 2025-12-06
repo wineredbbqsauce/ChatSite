@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../../styles/login/style.css";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -8,7 +9,7 @@ export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
-    showPassword(!showPassword);
+    setShowPassword(!showPassword);
   };
 
   const handleRegister = (e) => {
@@ -49,6 +50,13 @@ export default function Register() {
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       />
 
+      <video autoPlay muted loop id="bg-video">
+        <source
+          src="../../styles/assets/Flickering_lightbulb.mp4"
+          type="video/mp4"
+        />
+      </video>
+
       <div className="wrapper">
         <div>
           <h1>Register</h1>
@@ -61,10 +69,10 @@ export default function Register() {
               onChange={(e) => setName(e.target.value)}
               required
             />
-            <i className="vx bxs-user"></i>
+            <i className="bx bxs-user"></i>
           </div>
 
-          <div className="inputbox">
+          <div className="input-box">
             <input
               type="email"
               placeholder="Email"
@@ -72,7 +80,7 @@ export default function Register() {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <i className="vx bxs-envelope"></i>
+            <i className="bx bxs-envelope"></i>
           </div>
 
           <div className="input-box">
@@ -118,7 +126,7 @@ export default function Register() {
             Register
           </button>
 
-          <div className="registr-link">
+          <div className="register-link">
             <p>
               Already Have An Account? <a href="/Login">Login</a>
             </p>
