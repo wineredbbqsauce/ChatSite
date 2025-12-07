@@ -50,13 +50,6 @@ export default function Register() {
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       />
 
-      <video autoPlay muted loop id="bg-video">
-        <source
-          src="../../styles/assets/Flickering_lightbulb.mp4"
-          type="video/mp4"
-        />
-      </video>
-
       <div className="wrapper">
         <div>
           <h1>Register</h1>
