@@ -50,80 +50,81 @@ export default function Register() {
         rel="stylesheet"
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       />
+      <div className="auth-page">
+        <div className="wrapper">
+          <div>
+            <h1>Register</h1>
 
-      <div className="wrapper">
-        <div>
-          <h1>Register</h1>
-
-          <div className="input-box">
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-            />
-            <i className="bx bxs-user"></i>
-          </div>
-
-          <div className="input-box">
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <i className="bx bxs-envelope"></i>
-          </div>
-
-          <div className="input-box">
-            <input
-              type={showPassword ? "text" : "password"}
-              placeholder="Password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <i
-              className="fa-solid fa-lock"
-              id="lock-icon"
-              style={{ display: showPassword ? "none" : "inline" }}
-              onClick={togglePassword}
-            ></i>
-            <i
-              className="fa-solid fa-lock-open"
-              id="unlock-icon"
-              style={{ display: showPassword ? "inline" : "none" }}
-              onClick={togglePassword}
-            ></i>
-          </div>
-
-          <div className="remember-forgot">
-            <label>
+            <div className="input-box">
               <input
-                type="checkbox"
-                checked={rememberMe}
-                onChange={(e) => setRememberMe(e.target.checked)}
+                type="text"
+                placeholder="Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
               />
-              Remember me
-            </label>
-          </div>
+              <i className="bx bxs-user"></i>
+            </div>
 
-          <button
-            type="submit"
-            className="btn"
-            id="register"
-            onClick={handleRegister}
-          >
-            Register
-          </button>
+            <div className="input-box">
+              <input
+                type="email"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <i className="bx bxs-envelope"></i>
+            </div>
 
-          <div className="register-link">
-            <p>
-              Already Have An Account? <Link to="/login">Login</Link>
-            </p>
+            <div className="input-box">
+              <input
+                type={showPassword ? "text" : "password"}
+                placeholder="Password"
+                id="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <i
+                className="fa-solid fa-lock"
+                id="lock-icon"
+                style={{ display: showPassword ? "none" : "inline" }}
+                onClick={togglePassword}
+              ></i>
+              <i
+                className="fa-solid fa-lock-open"
+                id="unlock-icon"
+                style={{ display: showPassword ? "inline" : "none" }}
+                onClick={togglePassword}
+              ></i>
+            </div>
+
+            <div className="remember-forgot">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={rememberMe}
+                  onChange={(e) => setRememberMe(e.target.checked)}
+                />
+                Remember me
+              </label>
+            </div>
+
+            <button
+              type="submit"
+              className="btn"
+              id="register"
+              onClick={handleRegister}
+            >
+              Register
+            </button>
+
+            <div className="register-link">
+              <p>
+                Already Have An Account? <Link to="/login">Login</Link>
+              </p>
+            </div>
           </div>
         </div>
       </div>

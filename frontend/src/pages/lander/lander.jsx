@@ -3,7 +3,6 @@ import "../../styles/lander/lander.css";
 import { Link } from "react-router-dom";
 
 export default function LanderSite() {
-
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
@@ -88,6 +87,17 @@ export default function LanderSite() {
 
   return (
     <div className="website-container">
+      <h1
+        style={{
+          color: "white",
+          position: "absolute",
+          top: 20,
+          left: 20,
+          zIndex: 999,
+        }}
+      >
+        Lander Loaded
+      </h1>
       {/* Navigation */}
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
         <div className="nav-container">

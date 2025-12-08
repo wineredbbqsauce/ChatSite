@@ -13,7 +13,7 @@
     font-family: "Poppins", sans-serif;
 }
 
-body {
+.auth-page {
     display: flex;
     justify-content: center;
     align-items: center;

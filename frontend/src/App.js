@@ -1,9 +1,9 @@
 import React from "react";
 import "./App.css";
 import FusionChat from "./pages/main/main.jsx";
-import "./styles/main/main.css";
+// import "./styles/main/main.css";
 import {
-  BrowserRouter as Router,
+  // BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
@@ -15,29 +15,29 @@ import ProtectedRoute from "./utils/ProtectedRoutes.jsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Landing Page - Entry Point */}
-        <Route path="/" element={<LanderSite />} />
+    // <Router>
+    <Routes>
+      {/* Landing Page - Entry Point */}
+      <Route path="/" element={<LanderSite />} />
 
-        {/* Seperate Register and Login pages*/}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+      {/* Seperate Register and Login pages*/}
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
 
-        {/* Chat Page - Protected */}
-        <Route
-          path="/chat"
-          element={
-            <ProtectedRoute>
-              <FusionChat />
-            </ProtectedRoute>
-          }
-        />
+      {/* Chat Page - Protected */}
+      <Route
+        path="/chat"
+        element={
+          <ProtectedRoute>
+            <FusionChat />
+          </ProtectedRoute>
+        }
+      />
 
-        {/* Redirect unknown routes to landing */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+      {/* Redirect unknown routes to landing */}
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
+    // </Router>
   );
   // return <FusionChat />;
 }
