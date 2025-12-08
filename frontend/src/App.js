@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
-import FusionChat from "./pages/main";
-import "./styles/main.css";
+import FusionChat from "./pages/main/main.jsx";
+import "./styles/main/main.css";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from "react-router-dom";
-import LanderSite from "./lander/lander";
+import LanderSite from "./pages/lander/lander";
 import Register from "./pages/login/Register";
 import Login from "./pages/login/Login";
 import ProtectedRoute from "./utils/ProtectedRoute";

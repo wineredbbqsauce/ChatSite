@@ -14,6 +14,7 @@
   "license": "ICS",
   "dependencies": {
     "jsonwebtoken": "^9.0.3",
+    "lucide-react": "^0.469.0",
     "react-router-dom": "^7.10.1"
   }
 }
