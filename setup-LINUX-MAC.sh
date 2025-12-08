@@ -141,6 +141,11 @@ cd frontend
 npm run build
 cd ..
 
+# Install bcrypt
+echo ""
+echo "Installing bcrypt..."
+npm install bcrypt
+
 echo ""
 echo "======================================"
 echo -e "${GREEN}Installation Complete!${NC}"
