@@ -11,7 +11,7 @@ import {
 import LanderSite from "./pages/lander/lander";
 import Register from "./pages/login/Register";
 import Login from "./pages/login/Login";
-import ProtectedRoute from "./utils/ProtectedRoute";
+import ProtectedRoute from "./utils/ProtectedRoutes.jsx";
 
 function App() {
   return (
