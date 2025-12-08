@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "../../styles/login/style.css";
+import "../../styles/login/sign-up.css";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -121,7 +122,7 @@ export default function Register() {
 
           <div className="register-link">
             <p>
-              Already Have An Account? <a href="/Login">Login</a>
+              Already Have An Account? <Link to="/login">Login</Link>
             </p>
           </div>
         </div>

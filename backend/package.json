@@ -16,6 +16,7 @@
     "dbs": "^0.2.0",
     "dotenv": "^17.2.3",
     "express": "^4.22.1",
+    "jsonwebtoken": "^9.0.3",
     "mariadb": "^3.1.4"
   },
   "devDependencies": {

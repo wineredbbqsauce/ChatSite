@@ -22,7 +22,7 @@ import {
 //   Route,
 //   Navigate,
 // } from "react-router-dom";
-import "../styles/main.css"; // Import MAIN CSS file
+import "../../styles/main/main.css"; // Import MAIN CSS file
 
 export default function FusionChat() {
   const [messages, setMessages] = useState([
