@@ -2,11 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const fs = require("fs");
-const bcrypt = require("bcryptjs");
+// const bcrypt = require("bcryptjs");
 require("dotenv").config({
   path: path.join(__dirname, "../../../config/config.env"),
 });
 
+// Import routes and middleware
+const authRoutes = require("../../routes/auth.js");
+const authenticateToken = require("../../middleware/auth.js");
 // Ensure backend/src/server/db.js exports getConnection()
 const { getConnection } = require("./db");
 
@@ -14,7 +17,63 @@ const app = express(); // DEFINE APP BEFORE USING. DEFINE APP FIRST
 const hostname = "0.0.0.0";
 const port = process.env.PORT || 25565;
 
-// Serve frontend (production). Checks common build/public folders
+// Middleware (MUST be before routes)
+app.use(express.json());
+app.use(cors());
+
+// API Routes
+// Public routes (no authentication required)
+app.use("/api/auth", authRoutes); // This handles /api/routes/register and /api/auth/login
+
+// Health route
+app.post("/api/health", (req, res) => {
+  res.json({ status: "OK", env: process.env.NODE_ENV || "development" });
+});
+
+// Protected routes (authentication requiresd)
+app.get("/api/verify-token", authenticateToken, (req, res) => {
+  res.json({
+    valid: true,
+    user: req.user,
+  });
+});
+
+app.get("/api/user/profile", authenticateToken, async (req, res) => {
+  let conn;
+  try {
+    conn = await getConnection();
+    const rows = await conn.query(
+      "SELECT id, name, username, createdAt FROM users WHERE id = ?",
+      [req.user.id]
+    );
+    if (rows.lenght === 0) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.json({
+      success: true,
+      user: rows[0],
+    });
+  } catch {
+    console.error("Error fetching profile:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    if (conn) conn.release();
+  }
+});
+
+// Example: Protected Message route:
+app.get("api/message", authenticateToken, async (req, res) => {
+  // Access user ID with: req.use.id
+  // Your Message logic here
+  res.json({
+    success: true,
+    userId: req.user.id,
+    message: [], // Your message array
+  });
+});
+
+// Serve frontend (production). Checks common build/public folders - MUST be AFTER API routes
 const candidatePaths = [
   path.join(__dirname, "../../../frontend/build"),
   path.join(__dirname, "../../../frontend/dist"),
@@ -24,26 +83,24 @@ const candidatePaths = [
 const frontendPath = candidatePaths.find((p) => fs.existsSync(p));
 if (frontendPath) {
   app.use(express.static(frontendPath));
-  app.get("*", (req, res) =>
-    res.sendFile(path.join(frontendPath, "index.html"))
-  );
+
+  // Catch-all routes for React Router (MUST be last)
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendPath, "index.html"));
+  });
 } else {
   console.warn("No frontend buld/public folder found at:", candidatePaths);
 }
 
+// Start Server
+app.listen(port, hostname, () => {
+  console.log(`Server Running At http://${hostname}:${port}/`);
+});
+
 // Use yout DB helper that returns a connection from MariaDB pool
 // Ensure backend/src/server/db.js uses MariaDB instead of MongoDB
 
-// Middleware
-
-app.use(express.json());
-app.use(cors());
-
-// Health route
-app.post("/api/health", (req, res) => {
-  res.json({ status: "OK", env: process.env.NODE_ENV || "development" });
-});
-
+/**
 // Register
 app.post("/api/auth/register", async (req, res) => {
   try {
@@ -135,5 +192,5 @@ if (reactBuildPath) {
 app.listen(port, hostname, () => {
   console.log(`Server Running At http://${hostname}:${port}/`);
 });
-
+*/
 module.exports = app;

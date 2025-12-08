@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/lander/lander.css";
+import { Link } from "react-router-dom";
 
 export default function LanderSite() {
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState(new Set());
@@ -131,9 +133,16 @@ export default function LanderSite() {
             engineering
           </p>
           <div className="hero-buttons">
-            <a href="#join" className="btn btn-primary">
+            {/* <a
+              href="#"
+              className="btn btn-primary"
+              onClick={(e) => e.preventDefault()
+                navigate("/register") }}
+            > 
+            </a> */}
+            <Link to="/register" className="btn btn-primary">
               Start Typing...
-            </a>
+            </Link>
             <a href="#features" className="btn btn-secondary">
               Learn More
             </a>

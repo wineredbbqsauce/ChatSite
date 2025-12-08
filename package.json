@@ -11,5 +11,8 @@
   },
   "keywords": [],
   "author": "Bbq Sauce Inc. Coop. Com. Org. Net.",
-  "license": "ICS" 
+  "license": "ICS",
+  "dependencies": {
+    "react-router-dom": "^7.10.1"
+  }
 }
