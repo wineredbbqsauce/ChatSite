@@ -87,7 +87,7 @@ export default function LanderSite() {
 
   return (
     <div className="website-container">
-      <h1
+      {/* <h1
         style={{
           color: "white",
           position: "absolute",
@@ -97,11 +97,15 @@ export default function LanderSite() {
         }}
       >
         Lander Loaded
-      </h1>
+      </h1> */}
       {/* Navigation */}
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
         <div className="nav-container">
-          <div className="nav-logo">Echo</div>
+          <div className="nav-logo">
+            <Link to="/" replace>
+              Echo
+            </Link>
+          </div>
 
           <div className="nav-links">
             <a href="#features" className="nav-link">

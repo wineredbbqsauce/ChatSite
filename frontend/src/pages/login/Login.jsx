@@ -40,6 +40,8 @@ export default function Login() {
 
     // Example: Redirect after success registration
     // window.location.href = "/dashboard";
+    localStorage.setItem("authToken", "dummy-token");
+    window.location.href = "/chat";
   };
 
   return (

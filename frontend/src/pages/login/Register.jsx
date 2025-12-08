@@ -38,6 +38,10 @@ export default function Register() {
 
     // Example: Redirect after success registration
     // window.location.href = "/dashboard";
+
+    localStorage.setItem("authToken", "dummy-token"); // can be any string
+    // redirect to chat
+    window.location.href = "/chat";
   };
 
   return (
