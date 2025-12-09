@@ -46,6 +46,7 @@ sudo ./setup-LINUX-MAC.sh
 
 3. Right-Click `setup-WINDOWS.bat` and select **"Run as administrator"**
 
+---
 ## More Manual Setup (A bit automatic still)
 
 ---
