@@ -109,20 +109,42 @@ sudo ./setup-LINUX-MAC.sh
 3. npm install
 ```
 
-##### 4. Build the Frontend
+#### 4. Create Config.env
 
 ```bash
+cd config/
+*(Linux or Mac)* touch config.env
+*(Windows)* type nul > config.env
+```
+### 5. Configure your databse in `config/config.env`:
+
+```env
+    DB_HOST={your_host, (eks: localhost)}
+    DB_USER={your_user}
+    DB_PASSWORD={your_password}
+    DB_NAME=chatsitedb
+    PORT=25565
+```
+```bash
+cd ..
+cd ..
+```
+
+##### 6. Build the Frontend
+
+```bash
+cd frontend
 1. npm run build
 ```
 
-##### 5. Change Directory
+##### 7. Change Directory
 
 ```bash
 1. cd ..
 2. cd backend/
 ```
 
-##### 6. Start Server
+##### 8. Start Server
 
 ```bash
 1. npm run dev
