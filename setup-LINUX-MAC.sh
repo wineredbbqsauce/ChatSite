@@ -8,7 +8,12 @@ echo ""
 # Colors for output
 GREEN="\033[0;32m"
 RED="\033[0;31m"
+YELLOW="\033[0;33m"
+BLUE="\033[0;34m"
+MAGENTA="\033[0;35m"
+CYAN="\033[0;36m"
 NC="\033[0m" # No Colour
+
 
 # Check if running as root for MariaDB installation
 if [[ $EUID -ne 0 ]]; then
@@ -146,6 +151,13 @@ echo ""
 echo "Installing bcrypt..."
 npm install bcrypt
 
+# Get LOCAL IP (private network IP)
+LOCAL_IP=$(hostname -I | awk '{print $1}')
+
+# Get PUBLIC IP (internet-facing IP)
+PUBLIC_IP=$(curl -s ifconfig.me)
+
+
 # Allow the port through the firewall
 
 #load variables from config.env
@@ -177,7 +189,16 @@ echo "To start the server, run:"
 echo "  cd backend"
 echo "  npm start"
 echo ""
-echo "Then visit http://${DB_HOST}:${PORT}"
-echo "Or if only local on computer"
-echo "http://localhost:25565"
+
+echo "To Access the site:"
+echo "  ${YELLOW}- Local Network:${NC}"
+echo "      -> http://${LOCAL_IP}:${PORT}"
+echo ""
+echo "  ${YELLOW}- From this machine:${NC} "
+echo "      -> http://localhost:25565"
+echo ""
+echo "  ${MAGENTA}- Public Access:${NC}"
+if [ -n "$PUBLIC_IP" ]; then
+echo "      -> http://${PUBLIC_IP}:${PORT}"
+fi
 echo ""
