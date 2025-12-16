@@ -146,6 +146,15 @@ echo ""
 echo "Installing bcrypt..."
 npm install bcrypt
 
+# Allow the port through the firewall
+
+#load variables from config.env
+set -a  # automatically export all variables 
+source backend/config/config.env
+set +a  # stop automatically exporting
+
+ufw allow ${PORT}
+
 echo ""
 echo "======================================"
 echo -e "${GREEN}Installation Complete!${NC}"
@@ -168,5 +177,7 @@ echo "To start the server, run:"
 echo "  cd backend"
 echo "  npm start"
 echo ""
-echo "Then visit: http://localhost:25565"
+echo "Then visit http://${DB_HOST}:${PORT}"
+echo "Or if only local on computer"
+echo "http://localhost:25565"
 echo ""
