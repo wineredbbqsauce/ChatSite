@@ -105,9 +105,9 @@ echo -e "${GREEN}✓ Database 'chatsitedb' and user 'user' created${NC}"
 
 # Create config.env file
 echo ""
-echo "Creating config/config.env file..."
-mkdir -p config
-cat > config/config.env <<-EOF
+echo "Creating backend/config/config.env file..."
+mkdir -p backend/config
+cat > backend/config/config.env <<-EOF
 HOST=0.0.0.0
 DB_HOST=localhost
 DB_USER=user
