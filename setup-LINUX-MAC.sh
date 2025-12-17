@@ -71,6 +71,28 @@ echo -e "${GREEN}✓ MariaDB installed${NC}"
 # Secure MariaDB installation and set root password
 echo ""
 echo "Setting up MariaDB root password..."
+
+# Try without password first (fresh install)
+if mysql -u root -e "SELECT 1;" &> /dev/null; then
+    echo "Setting root password..."
+    mysql -u root <<-EOF
+ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
+FLUSH PRIVILEGES;
+EOF
+
+    echo -e "${GREEN} ✓ Root password set${NC}"
+else
+    # Password already exists, try with the expected password
+    if mysql -u root -p1234 -e "SELECT 1;" &> /dev/null; then
+        echo -e "${GREEN}✓ Root password already configured${NC}"
+    else
+        echo -e "${RED}Error: Cannot connect to MariaDB. Root password may be different.${NC}"
+        echo "Please reset MariaDB or use: sudo mysql_secure_installation"
+        exit 1
+    fi
+fi
+
+
 mysql -u root <<-EOF
 ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
 FLUSH PRIVILEGES;
