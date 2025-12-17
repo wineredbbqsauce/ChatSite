@@ -55,18 +55,24 @@ fi
 
 # Install MariaDB
 echo ""
-echo "Installing MariaDB..."
-if [ "$OS" == "linux" ]; then
-    apt-get update
-    apt-get install -y mariadb-server mariadb-client
-    systemctl start mariadb
-    systemctl enable mariadb
-elif [ "$OS" == "mac" ]; then
-    brew install mariadb
-    brew services start mariadb
-fi
+MARIADB_IS_INSTALLED=false
 
-echo -e "${GREEN}✓ MariaDB installed${NC}"
+if command -v mysql &> /dev/null; then
+    echo -e "${YELLOW}MariaDB is already installed${NC}"
+    MARIADB_IS_INSTALLED=true
+else
+    echo "Installing MariaDB..."
+    if [ "$OS" == "linux" ]; then
+        apt-get update
+        apt-get install -y mariadb-server mariadb-client
+        systemctl start mariadb
+        systemctl enable mariadb
+    elif [ "$OS" == "mac" ]; then
+        brew install mariadb
+        brew services start mariadb
+    fi
+    echo -e "${GREEN}✓ MariaDB installed${NC}"
+fi
 
 # Secure MariaDB installation and set root password
 echo ""
@@ -84,7 +90,7 @@ EOF
 else
     # Password already exists, try with the expected password
     if mysql -u root -p1234 -e "SELECT 1;" &> /dev/null; then
-        echo -e "${GREEN}✓ Root password already configured${NC}"
+        echo -e "${YELLOW}✓ Root password already configured${NC}"
     else
         echo -e "${RED}Error: Cannot connect to MariaDB. Root password may be different.${NC}"
         echo "Please reset MariaDB or use: sudo mysql_secure_installation"
@@ -92,11 +98,6 @@ else
     fi
 fi
 
-
-mysql -u root <<-EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY '1234';
-FLUSH PRIVILEGES;
-EOF
 
 # Create database and application user
 echo ""
@@ -178,7 +179,7 @@ echo ""
 LOCAL_IP=$(hostname -I | awk '{print $1}')
 
 # Get PUBLIC IP (internet-facing IP)
-PUBLIC_IP=$(curl -s ifconfig.me)
+PUBLIC_IP=$(curl -s --max-time 5 ifconfig.me 2>/dev/null)u
 
 
 # Allow the port through the firewall
@@ -216,10 +217,10 @@ echo "  npm start"
 echo ""
 
 echo "To Access the site:"
-echo -e "  ${YELLOW}- Local Network:${NC}"
+echo -e "  ${CYAN}- Local Network:${NC}"
 echo "      -> http://${LOCAL_IP}:${PORT}"
 echo ""
-echo -e "  ${YELLOW}- From this machine:${NC}"
+echo -e "  ${CYAN}- From this machine:${NC}"
 echo "      -> http://localhost:${PORT}"  # Changed from hardcoded 25565
 echo ""
 if [ -n "$PUBLIC_IP" ]; then
