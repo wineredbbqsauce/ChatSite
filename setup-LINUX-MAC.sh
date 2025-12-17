@@ -150,6 +150,7 @@ cd ..
 echo ""
 echo "Installing bcrypt..."
 npm install bcrypt
+echo ""
 
 # Get LOCAL IP (private network IP)
 LOCAL_IP=$(hostname -I | awk '{print $1}')
@@ -166,6 +167,8 @@ source backend/config/config.env
 set +a  # stop automatically exporting
 
 ufw allow ${PORT}
+
+echo -e "${GREEN}✓ Firewall rule added for port ${PORT}${NC}"
 
 echo ""
 echo "======================================"
@@ -191,14 +194,18 @@ echo "  npm start"
 echo ""
 
 echo "To Access the site:"
-echo "  ${YELLOW}- Local Network:${NC}"
+echo -e "  ${YELLOW}- Local Network:${NC}"
 echo "      -> http://${LOCAL_IP}:${PORT}"
 echo ""
-echo "  ${YELLOW}- From this machine:${NC} "
-echo "      -> http://localhost:25565"
+echo -e "  ${YELLOW}- From this machine:${NC}"
+echo "      -> http://localhost:${PORT}"  # Changed from hardcoded 25565
 echo ""
-echo "  ${MAGENTA}- Public Access:${NC}"
 if [ -n "$PUBLIC_IP" ]; then
-echo "      -> http://${PUBLIC_IP}:${PORT}"
+    echo -e "  ${MAGENTA}- Public Access:${NC}"
+    echo "      -> http://${PUBLIC_IP}:${PORT}"
+    echo ""
+    echo -e "  ${YELLOW}Note:${NC} Make sure port ${PORT} is open on your router for public access"
+else
+    echo -e "  ${YELLOW}Note:${NC} Could not determine public IP address"
 fi
 echo ""
