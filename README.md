@@ -1,34 +1,48 @@
-# Chat Site
+# ***ChatSite 💬🔥***
 
-## Dette skal bli til en chat nettside der man skal kunne skive til hverandre, legge til bilder, lydfiler.
+## **A modern real-time chat platform built with Node.js, React, and MariaDB. Chat with friends, send images, record voice messages — with even more features planned.**
+## **✨ Features**
+### ✅ Current
 
-- Skrive meldinger
-- Spille inn lydfiler
-- Sende bilder, evt ta bilder direkte i siden
+- 💬 Real-time messaging between users
+
+### 🚧 Planned / Upcoming
+
+- 🎤 Voice message recording
+
+- 🖼️ Image sharing (upload or take photos directly)
+
+- 🔐 User authentication (Register & Login)
+
+- 📞 Voice calls
+
+- 📺 Live streaming
+
+- 👥 Groups / Servers
+
+- 🎨 UI redesign & animations
+
+- 📱 Improved mobile experience
 
 ---
 
-## Eventuelle ting som man kan legge til:
+## **🧱 Tech Stack**
 
-- Voice Call
-- Streaming
-- Groups / Server
+**Frontend:** React
 
----
+**Backend:** Node.js, Express
 
-### Under arbeid:
+**Database:** MariaDB
 
-- Fikse en Landing / Home side
-- Fikse slik at Registrer og Login funker slik den skal
-- Koble sammen database (backend) og Forsiden (frontend)
+**Authentication:** Custom auth system
+
+**Other:** Node scripts for setup & automation
 
 ---
+## **SETUP**
 
-## SETUP
-
-### QUICK SETUP (Automated)
-
-### Linux/Mac:
+### 🚀 Quick Setup (Recommended)
+### *Linux/Mac:*
 
 ```bash
 git clone https://github.com/wineredbbqsauce/ChatSite.git
@@ -37,19 +51,17 @@ chmod +x ./setup-LINUX-MAC.sh
 sudo ./setup-LINUX-MAC.sh
 ```
 
-### WINDOWS:
+### *WINDOWS:*
 
 1. Download and Install [Node.js](https://nodejs.org/) (if not already installed)
 2. Download and Install [MariaDB](https://mariadb.org/download/)
 
-- During installation, set root password to: `1234`
+    - During installation, set root password to: `1234`
 
 3. Right-Click `setup-WINDOWS.bat` and select **"Run as administrator"**
 
 ---
-## More Manual Setup (A bit automatic still)
-
----
+## **⚙️ Manual Setup (Advanced)**
 
 ### 1. Clone The Repository:
 
@@ -85,7 +97,9 @@ sudo ./setup-LINUX-MAC.sh
 
 ---
 
-#### INSTALL DEPENDENCIES MANUALLY IF "RUN AND INSTALL FILES" DID NOT WORK. **(MANUAL)**
+## **🛠️ Full Manual Install (Fallback)**
+
+|   Use this only if automated setup fails
 
 ##### 1. Clone Repository
 
@@ -152,8 +166,18 @@ cd frontend
 
 ###### (using _run dev_ for now..)
 
-###### **_to be continued..._**
+## **🧪 Status**
+
+**🚧 This project is still under active development**
+
+Expect bugs, unfinished features, and frequent changes.
 
 ---
 
-###### All right served to me (BBQ Sauce Inc. Coop. Com. Org. Net.) <3
+## 🤝 Contributing
+Pull requests, ideas, and feedback are welcome. Feel free to fork the project and experiment.
+
+---
+
+###### Built with ❤️, caffeine ☕ and fent, questionable decisions
+© BBQ Sauce Inc. Coop. Com. Org. Net.
