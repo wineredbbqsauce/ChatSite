@@ -6,21 +6,25 @@
 
 - 💬 Real-time messaging between users
 
+
+### 🪏 Under Construction
+
+- 🔐 User authentication (Register & Login)
+
+- 🎨 UI redesign & animations
+
+
 ### 🚧 Planned / Upcoming
 
 - 🎤 Voice message recording
 
 - 🖼️ Image sharing (upload or take photos directly)
 
-- 🔐 User authentication (Register & Login)
-
 - 📞 Voice calls
 
 - 📺 Live streaming
 
 - 👥 Groups / Servers
-
-- 🎨 UI redesign & animations
 
 - 📱 Improved mobile experience
 
