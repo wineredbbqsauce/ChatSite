@@ -183,5 +183,5 @@ Pull requests, ideas, and feedback are welcome. Feel free to fork the project an
 
 ---
 
-###### Built with ❤️, caffeine ☕ and fent, questionable decisions
+###### Built with ❤️, caffeine ☕, fent and questionable decisions
 © BBQ Sauce Inc. Coop. Com. Org. Net.
